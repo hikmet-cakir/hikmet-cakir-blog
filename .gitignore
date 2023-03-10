@@ -1,7 +1,8 @@
 
-*.class
+*.class 
+  
+*.iml
+
+backend/.idea/
 
 backend/hikmet-cakir/.idea/
- 
-
-*.iml
