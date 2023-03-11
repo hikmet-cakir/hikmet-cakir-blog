@@ -1,8 +1,7 @@
 package com.hikmetcakir.domain.article.rest;
 
 import com.hikmetcakir.article.QueryArticleUseCaseHandler;
-import com.hikmetcakir.article.model.Article;
-import com.hikmetcakir.article.usecase.QueryArticle;
+import com.hikmetcakir.domain.article.dto.QueryArticleRequest;
 import com.hikmetcakir.domain.article.dto.QueryArticleResponse;
 import com.hikmetcakir.domain.article.rest.api.ArticleApi;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,8 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ResponseEntity<QueryArticleResponse> queryArticle(String id) {
-        Article handle = queryArticleUseCaseHandler.handle(new QueryArticle());
-        return ResponseEntity.ok(new QueryArticleResponse());
+    public ResponseEntity<QueryArticleResponse> queryArticle(QueryArticleRequest queryArticleRequest) {
+        var article = queryArticleUseCaseHandler.handle(queryArticleRequest.toModel());
+        return ResponseEntity.ok(QueryArticleResponse.fromModel(article));
     }
 }
