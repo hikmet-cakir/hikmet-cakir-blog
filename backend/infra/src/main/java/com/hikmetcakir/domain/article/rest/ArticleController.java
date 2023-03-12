@@ -4,18 +4,15 @@ import com.hikmetcakir.article.QueryArticleUseCaseHandler;
 import com.hikmetcakir.domain.article.dto.QueryArticleRequest;
 import com.hikmetcakir.domain.article.dto.QueryArticleResponse;
 import com.hikmetcakir.domain.article.rest.api.ArticleApi;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class ArticleController implements ArticleApi {
 
-
     private final QueryArticleUseCaseHandler queryArticleUseCaseHandler;
-
-    public ArticleController(QueryArticleUseCaseHandler queryArticleUseCaseHandler) {
-        this.queryArticleUseCaseHandler = queryArticleUseCaseHandler;
-    }
 
     @Override
     public ResponseEntity<QueryArticleResponse> queryArticle(QueryArticleRequest queryArticleRequest) {

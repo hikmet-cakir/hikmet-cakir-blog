@@ -6,3 +6,7 @@
 backend/.idea/
 
 backend/hikmet-cakir/.idea/
+
+*.cmd
+
+backend/demo/
