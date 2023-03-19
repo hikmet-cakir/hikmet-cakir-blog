@@ -2,6 +2,7 @@ package com.hikmetcakir.domain.article.adapter;
 
 import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.port.ArticlePort;
+import com.hikmetcakir.article.usecase.DeleteArticle;
 import com.hikmetcakir.article.usecase.UploadArticle;
 import com.hikmetcakir.domain.article.jpa.entity.ArticleEntity;
 import com.hikmetcakir.domain.article.jpa.repository.ArticleJpaRepository;
@@ -22,5 +23,12 @@ public class ArticleDataAdapter implements ArticlePort {
         articleEntity.setId(UUID.randomUUID().toString());
         articleEntity.setContent(uploadArticle.getContent());
         return articleJpaRepository.save(articleEntity).toModel();
+    }
+
+    @Override
+    public void delete(DeleteArticle deleteArticle) {
+        var article = articleJpaRepository.findById(deleteArticle.getId())
+                .orElseThrow(() -> new RuntimeException("Article was not found!"));
+        articleJpaRepository.delete(article);
     }
 }

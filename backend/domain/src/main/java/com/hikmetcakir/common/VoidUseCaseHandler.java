@@ -1,6 +1,8 @@
 package com.hikmetcakir.common;
 
-public interface VoidUseCaseHandler {
+import com.hikmetcakir.common.model.UseCase;
 
-    void handle();
+public interface VoidUseCaseHandler<T extends UseCase> {
+
+    void handle(T t);
 }

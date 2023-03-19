@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class QueryArticle implements UseCase {
+public class DeleteArticle implements UseCase {
 
     private String id;
 }
