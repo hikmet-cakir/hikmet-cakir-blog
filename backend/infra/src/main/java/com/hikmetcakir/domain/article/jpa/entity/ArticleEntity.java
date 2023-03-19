@@ -1,5 +1,6 @@
 package com.hikmetcakir.domain.article.jpa.entity;
 
+import com.hikmetcakir.article.model.Article;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,4 +22,11 @@ public class ArticleEntity {
 
     @Column(name =  "content")
     private String content;
+
+    public Article toModel() {
+        return Article.builder()
+                .id(id)
+                .content(content)
+                .build();
+    }
 }
