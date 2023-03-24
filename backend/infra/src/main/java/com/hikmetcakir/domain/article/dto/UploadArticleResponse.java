@@ -1,5 +1,6 @@
 package com.hikmetcakir.domain.article.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hikmetcakir.article.model.Article;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -42,7 +42,7 @@ public class ArticleController implements ArticleApi {
 
     @Override
     public ResponseEntity<UpdateArticleResponse> updateArticle(String id, UpdateArticleRequest updateArticleRequest) {
-        var article = updateArticleUseCaseHandler.handle(updateArticleRequest.toModel(id));
-        return ResponseEntity.ok(UpdateArticleResponse.fromModel(article));
+        updateArticleUseCaseHandler.handle(updateArticleRequest.toModel(id));
+        return ResponseEntity.ok(new UpdateArticleResponse());
     }
 }

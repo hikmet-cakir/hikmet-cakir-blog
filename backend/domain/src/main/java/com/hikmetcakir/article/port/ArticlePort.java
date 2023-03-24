@@ -12,7 +12,7 @@ public interface ArticlePort {
 
     void delete(DeleteArticle deleteArticle);
 
-    Article update(UpdateArticle updateArticle);
+    void update(UpdateArticle updateArticle);
 
     Article query(QueryArticle queryArticle);
 }
