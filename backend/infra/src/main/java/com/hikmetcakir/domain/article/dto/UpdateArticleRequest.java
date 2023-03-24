@@ -17,6 +17,7 @@ public class UpdateArticleRequest {
     public UpdateArticle toModel(String id) {
         return UpdateArticle.builder()
                 .id(id)
+                .content(content)
                 .build();
     }
 }
