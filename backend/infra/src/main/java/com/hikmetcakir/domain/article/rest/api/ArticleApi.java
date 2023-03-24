@@ -2,10 +2,7 @@ package com.hikmetcakir.domain.article.rest.api;
 
 import com.hikmetcakir.domain.article.dto.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 public interface ArticleApi {
 
@@ -17,4 +14,7 @@ public interface ArticleApi {
 
     @RequestMapping(value = "/article", method = RequestMethod.POST)
     ResponseEntity<UploadArticleResponse> uploadArticle(@RequestBody UploadArticleRequest uploadArticleRequest);
+
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.PATCH)
+    ResponseEntity<UpdateArticleResponse> updateArticle(@PathVariable String id, @RequestBody UpdateArticleRequest updateArticleRequest);
 }

@@ -19,7 +19,6 @@ public class ArticleEntity {
     @Column(name = "id")
     private String id;
 
-
     @Column(name =  "content")
     private String content;
 

@@ -2,6 +2,8 @@ package com.hikmetcakir.article.port;
 
 import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.usecase.DeleteArticle;
+import com.hikmetcakir.article.usecase.QueryArticle;
+import com.hikmetcakir.article.usecase.UpdateArticle;
 import com.hikmetcakir.article.usecase.UploadArticle;
 
 public interface ArticlePort {
@@ -9,4 +11,8 @@ public interface ArticlePort {
     Article upload(UploadArticle uploadArticle);
 
     void delete(DeleteArticle deleteArticle);
+
+    Article update(UpdateArticle updateArticle);
+
+    Article query(QueryArticle queryArticle);
 }
