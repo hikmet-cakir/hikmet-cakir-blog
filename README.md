@@ -1,12 +1,10 @@
-### Hikmet Cakir Blog
+## Hikmet Cakir Blog
 
-## Backend side consists of 
+### Backend side consists of 
 - Java 11 
 - Maven 
-- Spring Boot
-- MySQL and more... 
+- SpringBoot
+- MySQL
 
-Additionally, It has hexagonal architecture structure. 
-
-## Frontend side consists of 
+### Frontend side consists of 
 - React
