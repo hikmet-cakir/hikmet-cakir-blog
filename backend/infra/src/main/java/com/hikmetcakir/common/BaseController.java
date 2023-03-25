@@ -19,8 +19,4 @@ public class BaseController {
     protected Response<ErrorResponse> respond(ErrorResponse errorResponse) {
         return ResponseBuilder.build(errorResponse);
     }
-
-    protected Response<SuccessResponse> respond(SuccessResponse successResponse) {
-        return ResponseBuilder.build(successResponse);
-    }
 }

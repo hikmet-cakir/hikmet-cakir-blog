@@ -22,8 +22,4 @@ public class ResponseBuilder {
     public static Response<ErrorResponse> build(ErrorResponse errorResponse) {
         return new Response<>(errorResponse);
     }
-
-    public static Response<SuccessResponse> build(SuccessResponse successResponse) {
-        return new Response<>(successResponse);
-    }
 }
