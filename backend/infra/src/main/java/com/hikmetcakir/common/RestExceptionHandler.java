@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
-public class RestExceptionHandler {
+public class RestExceptionHandler extends BaseController {
 
     private final MessageSource messageSource;
 
@@ -33,54 +33,54 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<ErrorResponse> handleException(Exception exception, Locale locale) {
+    public Response<ErrorResponse> handleException(Exception exception, Locale locale) {
         log.error("An error occurred! Details: ", exception);
         return createErrorResponseFromMessageSource("common.system.error.occurred", locale);
     }
 
     @ExceptionHandler(ArticleException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<ErrorResponse> handleArticleException(ArticleException articleException, Locale locale) {
+    public Response<ErrorResponse> handleArticleException(ArticleException articleException, Locale locale) {
         log.error("An error occurred! Details: ", articleException);
         return createErrorResponseFromMessageSource(articleException.getExceptionCode().getKey(), locale);
     }
 
     @ExceptionHandler(WebExchangeBindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleRequestPropertyBindingError(WebExchangeBindException webExchangeBindException, Locale locale) {
+    public Response<ErrorResponse> handleRequestPropertyBindingError(WebExchangeBindException webExchangeBindException, Locale locale) {
         log.debug("Bad request!", webExchangeBindException);
         return createFieldErrorResponse(webExchangeBindException.getBindingResult(), locale);
     }
 
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleBindException(BindException bindException, Locale locale) {
+    public Response<ErrorResponse> handleBindException(BindException bindException, Locale locale) {
         log.debug("Bad request!", bindException);
         return createFieldErrorResponse(bindException.getBindingResult(), locale);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleInvalidArgumentException(MethodArgumentNotValidException methodArgumentNotValidException, Locale locale) {
+    public Response<ErrorResponse> handleInvalidArgumentException(MethodArgumentNotValidException methodArgumentNotValidException, Locale locale) {
         log.debug("Method argument not valid. Message: $methodArgumentNotValidException.message", methodArgumentNotValidException);
         return createFieldErrorResponse(methodArgumentNotValidException.getBindingResult(), locale);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException, Locale locale) {
+    public Response<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException, Locale locale) {
         log.trace("MethodArgumentTypeMismatchException occurred", methodArgumentTypeMismatchException);
         return createErrorResponseFromMessageSource("common.client.typeMismatch", locale, methodArgumentTypeMismatchException.getName());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public ResponseEntity<ErrorResponse> handleMethodNotSupportedException(HttpRequestMethodNotSupportedException methodNotSupportedException, Locale locale) {
+    public Response<ErrorResponse> handleMethodNotSupportedException(HttpRequestMethodNotSupportedException methodNotSupportedException, Locale locale) {
         log.debug("HttpRequestMethodNotSupportedException occurred", methodNotSupportedException);
         return createErrorResponseFromMessageSource("common.client.methodNotSupported", locale, methodNotSupportedException.getMethod());
     }
 
-    private ResponseEntity<ErrorResponse> createFieldErrorResponse(BindingResult bindingResult, Locale locale) {
+    private Response<ErrorResponse> createFieldErrorResponse(BindingResult bindingResult, Locale locale) {
         List<String> requiredFieldErrorMessages = retrieveLocalizationMessage("common.client.requiredField", locale);
         String code = requiredFieldErrorMessages.get(0);
 
@@ -93,12 +93,12 @@ public class RestExceptionHandler {
 
         log.debug("Exception occurred while request validation: {}", errorMessage);
 
-        return ResponseEntity.ok(new ErrorResponse(code, errorMessage));
+        return respond(new ErrorResponse(code, errorMessage));
     }
 
-    private ResponseEntity<ErrorResponse> createErrorResponseFromMessageSource(String key, Locale locale, String... args) {
+    private Response<ErrorResponse> createErrorResponseFromMessageSource(String key, Locale locale, String... args) {
         List<String> messageList = retrieveLocalizationMessage(key, locale, args);
-        return ResponseEntity.ok(new ErrorResponse(messageList.get(0), messageList.get(1)));
+        return respond(new ErrorResponse(messageList.get(0), messageList.get(1)));
     }
 
     private List<String> retrieveLocalizationMessage(String key, Locale locale, String... args) {

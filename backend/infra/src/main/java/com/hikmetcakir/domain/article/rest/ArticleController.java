@@ -4,15 +4,16 @@ import com.hikmetcakir.article.DeleteArticleUseCaseHandler;
 import com.hikmetcakir.article.QueryArticleUseCaseHandler;
 import com.hikmetcakir.article.UpdateArticleUseCaseHandler;
 import com.hikmetcakir.article.UploadArticleUseCaseHandler;
+import com.hikmetcakir.common.BaseController;
+import com.hikmetcakir.common.Response;
 import com.hikmetcakir.domain.article.dto.*;
 import com.hikmetcakir.domain.article.rest.api.ArticleApi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class ArticleController implements ArticleApi {
+public class ArticleController extends BaseController implements ArticleApi {
 
     private final QueryArticleUseCaseHandler queryArticleUseCaseHandler;
 
@@ -23,26 +24,26 @@ public class ArticleController implements ArticleApi {
     private final UpdateArticleUseCaseHandler updateArticleUseCaseHandler;
 
     @Override
-    public ResponseEntity<QueryArticleResponse> queryArticle(QueryArticleRequest queryArticleRequest) {
+    public Response<QueryArticleResponse> queryArticle(QueryArticleRequest queryArticleRequest) {
         var article = queryArticleUseCaseHandler.handle(queryArticleRequest.toModel());
-        return ResponseEntity.ok(QueryArticleResponse.fromModel(article));
+        return respond(QueryArticleResponse.fromModel(article));
     }
 
     @Override
-    public ResponseEntity<DeleteArticleResponse> deleteArticle(DeleteArticleRequest deleteArticleRequest) {
+    public Response<DeleteArticleResponse> deleteArticle(DeleteArticleRequest deleteArticleRequest) {
         deleteArticleUseCaseHandler.handle(deleteArticleRequest.toModel());
-        return ResponseEntity.ok(new DeleteArticleResponse());
+        return respond(new DeleteArticleResponse());
     }
 
     @Override
-    public ResponseEntity<UploadArticleResponse> uploadArticle(UploadArticleRequest uploadArticleRequest) {
+    public Response<UploadArticleResponse> uploadArticle(UploadArticleRequest uploadArticleRequest) {
         var article = uploadArticleUseCaseHandler.handle(uploadArticleRequest.toModel());
-        return ResponseEntity.ok(UploadArticleResponse.fromModel(article));
+        return respond(UploadArticleResponse.fromModel(article));
     }
 
     @Override
-    public ResponseEntity<UpdateArticleResponse> updateArticle(String id, UpdateArticleRequest updateArticleRequest) {
+    public Response<UpdateArticleResponse> updateArticle(String id, UpdateArticleRequest updateArticleRequest) {
         updateArticleUseCaseHandler.handle(updateArticleRequest.toModel(id));
-        return ResponseEntity.ok(new UpdateArticleResponse());
+        return respond(new UpdateArticleResponse());
     }
 }
