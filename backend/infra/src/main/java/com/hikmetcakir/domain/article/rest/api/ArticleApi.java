@@ -12,11 +12,11 @@ public interface ArticleApi {
     Response<QueryArticleResponse> queryArticle(@RequestParam(value = "id") QueryArticleRequest queryArticleRequest);
 
     @RequestMapping(value = "/article", method = RequestMethod.DELETE)
-    Response<DeleteArticleResponse> deleteArticle(@RequestParam(value = "id") DeleteArticleRequest deleteArticleRequest);
+    void deleteArticle(@RequestParam(value = "id") DeleteArticleRequest deleteArticleRequest);
 
     @RequestMapping(value = "/article", method = RequestMethod.POST)
     Response<UploadArticleResponse> uploadArticle(@RequestBody UploadArticleRequest uploadArticleRequest);
 
     @RequestMapping(value = "/article/{id}", method = RequestMethod.PATCH)
-    Response<UpdateArticleResponse> updateArticle(@PathVariable String id, @RequestBody UpdateArticleRequest updateArticleRequest);
+    void updateArticle(@PathVariable String id, @RequestBody UpdateArticleRequest updateArticleRequest);
 }

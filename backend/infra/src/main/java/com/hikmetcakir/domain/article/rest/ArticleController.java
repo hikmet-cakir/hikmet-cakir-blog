@@ -30,9 +30,8 @@ public class ArticleController extends BaseController implements ArticleApi {
     }
 
     @Override
-    public Response<DeleteArticleResponse> deleteArticle(DeleteArticleRequest deleteArticleRequest) {
+    public void deleteArticle(DeleteArticleRequest deleteArticleRequest) {
         deleteArticleUseCaseHandler.handle(deleteArticleRequest.toModel());
-        return respond(new DeleteArticleResponse());
     }
 
     @Override
@@ -42,8 +41,7 @@ public class ArticleController extends BaseController implements ArticleApi {
     }
 
     @Override
-    public Response<UpdateArticleResponse> updateArticle(String id, UpdateArticleRequest updateArticleRequest) {
+    public void updateArticle(String id, UpdateArticleRequest updateArticleRequest) {
         updateArticleUseCaseHandler.handle(updateArticleRequest.toModel(id));
-        return respond(new UpdateArticleResponse());
     }
 }
