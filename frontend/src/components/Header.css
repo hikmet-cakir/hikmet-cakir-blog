@@ -1,0 +1,16 @@
+.header {
+    width: 100%;
+    background: #080008;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin: 1%;
+    color: #fff;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff; 
+}
+ 
