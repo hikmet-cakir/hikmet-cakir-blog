@@ -2,7 +2,7 @@ import './Header.css';
 
 function Header() {
   return (
-    <div class="header">
+    <header class="header">
       <ul class="nav-links">
         <li><a href="/">Hikmet Cakir</a></li> 
         <li style={{float: 'right'}}><a href="/">Algorithm</a></li>
@@ -10,7 +10,7 @@ function Header() {
         <li style={{float: 'right'}}><a href="/">Spring</a></li> 
         <li style={{float: 'right'}}><a href="/">Java</a></li> 
       </ul>
-    </div>
+    </header>
   );
 }
 
