@@ -1,11 +1,11 @@
 import Header from './Header';
 
-function Branch() {
+function Spring() {
   return (
-    <branch>
+    <spring>
         <Header/>
-    </branch>
+    </spring>
   );
 }
 
-export default Branch
+export default Spring;
