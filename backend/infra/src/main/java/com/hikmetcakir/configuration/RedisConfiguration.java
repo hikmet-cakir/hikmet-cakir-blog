@@ -1,5 +1,6 @@
 package com.hikmetcakir.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -14,13 +15,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @EnableCaching
+@RequiredArgsConstructor
 public class RedisConfiguration {
 
-    @Value("${spring.redis.host}")
-    private String redisHostname;
-
-    @Value("${spring.redis.port}")
-    private int redisPort;
+    private final RedisConfigurationProperties redisConfigurationProperties;
 
     @Bean
     public RedisTemplate<String, String> redisTemplate() {
@@ -33,7 +31,8 @@ public class RedisConfiguration {
         redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
 
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(redisHostname, redisPort);
+        RedisStandaloneConfiguration configuration =
+                new RedisStandaloneConfiguration(redisConfigurationProperties.getHost(), redisConfigurationProperties.getPort());
 
         //Building Jedis Redis Template
         JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().build();
