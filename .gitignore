@@ -12,3 +12,5 @@ backend/hikmet-cakir/.idea/
 backend/demo/
 
 */target/**
+backend/infra/target/
+backend/domain/target/
