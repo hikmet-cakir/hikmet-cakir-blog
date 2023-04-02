@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfigurationProperties {
-    private int port;
     private String host;
-    private int expireTime;
+    private int portNumber;
+    private int expireTimeAsMinute;
 }

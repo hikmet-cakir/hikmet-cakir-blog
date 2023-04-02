@@ -19,6 +19,12 @@ public class RedisCacheAdapter implements CachePort {
 
     private final Gson gson;
 
+    @Override
+    public void deleteValue(String key) {
+        redisTemplate.delete(key);
+    }
+
+    @Override
     public <T> T getValue(String key, Class<T> type) {
         String value = redisTemplate.opsForValue().get(key);
         return gson.fromJson(value, type);
@@ -27,11 +33,6 @@ public class RedisCacheAdapter implements CachePort {
     @Override
     public <T> void putValue(String key, T value) {
         redisTemplate.opsForValue().set(key, gson.toJson(value));
-        redisTemplate.expire(key, redisConfigurationProperties.getExpireTime(), TimeUnit.MINUTES);
-    }
-
-    @Override
-    public void deleteValue(String key) {
-        redisTemplate.delete(key);
+        redisTemplate.expire(key, redisConfigurationProperties.getExpireTimeAsMinute(), TimeUnit.MINUTES);
     }
 }

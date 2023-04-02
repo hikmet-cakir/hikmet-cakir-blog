@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,7 +33,9 @@ public class ArticleDataAdapter implements ArticlePort {
         articleEntity.setContent(uploadArticle.getContent());
         articleEntity.setUpdatedAt(LocalDateTime.now());
         articleEntity.setCreatedAt(LocalDateTime.now());
-        return articleJpaRepository.save(articleEntity).toModel();
+        var article = articleJpaRepository.save(articleEntity).toModel();
+        cachePort.putValue(article.getId(), article);
+        return article;
     }
 
     @Override
@@ -53,8 +54,8 @@ public class ArticleDataAdapter implements ArticlePort {
     public void delete(DeleteArticle deleteArticle) {
         var articleEntity = articleJpaRepository.findById(deleteArticle.getId())
                 .orElseThrow(() -> new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND));
-        cachePort.deleteValue(articleEntity.getId());
         articleJpaRepository.delete(articleEntity);
+        cachePort.deleteValue(articleEntity.getId());
     }
 
     @Override
@@ -64,5 +65,6 @@ public class ArticleDataAdapter implements ArticlePort {
         articleEntity.setContent(updateArticle.getContent());
         articleEntity.setUpdatedAt(updateArticle.getUpdatedAt());
         articleJpaRepository.save(articleEntity);
+        cachePort.putValue(updateArticle.getId(), articleEntity.toModel());
     }
 }

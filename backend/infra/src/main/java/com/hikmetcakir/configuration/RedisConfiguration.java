@@ -32,7 +32,7 @@ public class RedisConfiguration {
 
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         RedisStandaloneConfiguration configuration =
-                new RedisStandaloneConfiguration(redisConfigurationProperties.getHost(), redisConfigurationProperties.getPort());
+                new RedisStandaloneConfiguration(redisConfigurationProperties.getHost(), redisConfigurationProperties.getPortNumber());
 
         //Building Jedis Redis Template
         JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().build();
