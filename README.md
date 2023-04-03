@@ -5,6 +5,7 @@
 - Maven 
 - SpringBoot
 - MySQL
+- Redis
 
 ### Frontend side consists of 
 - React
