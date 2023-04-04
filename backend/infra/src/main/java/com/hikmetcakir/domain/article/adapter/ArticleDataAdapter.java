@@ -31,6 +31,7 @@ public class ArticleDataAdapter implements ArticlePort {
         var articleEntity = new ArticleEntity();
         articleEntity.setId(UUID.randomUUID().toString());
         articleEntity.setContent(uploadArticle.getContent());
+        articleEntity.setGenre(uploadArticle.getGenre());
         articleEntity.setUpdatedAt(LocalDateTime.now());
         articleEntity.setCreatedAt(LocalDateTime.now());
         var article = articleJpaRepository.save(articleEntity).toModel();
@@ -63,6 +64,7 @@ public class ArticleDataAdapter implements ArticlePort {
         var articleEntity = articleJpaRepository.findById(updateArticle.getId())
                 .orElseThrow(() -> new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND));
         articleEntity.setContent(updateArticle.getContent());
+        articleEntity.setGenre(updateArticle.getGenre());
         articleEntity.setUpdatedAt(updateArticle.getUpdatedAt());
         articleJpaRepository.save(articleEntity);
         cachePort.putValue(updateArticle.getId(), articleEntity.toModel());

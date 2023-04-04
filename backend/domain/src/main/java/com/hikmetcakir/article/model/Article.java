@@ -11,6 +11,7 @@ public class Article {
 
     private String id;
     private String content;
+    private Genre genre;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
 }

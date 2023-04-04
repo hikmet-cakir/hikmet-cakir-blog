@@ -1,13 +1,11 @@
 package com.hikmetcakir.domain.article.jpa.entity;
 
 import com.hikmetcakir.article.model.Article;
+import com.hikmetcakir.article.model.Genre;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,6 +21,10 @@ public class ArticleEntity {
     @Column(name =  "content")
     private String content;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genre")
+    private Genre genre;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
@@ -33,6 +35,7 @@ public class ArticleEntity {
         return Article.builder()
                 .id(id)
                 .content(content)
+                .genre(genre)
                 .updatedAt(updatedAt)
                 .createdAt(createdAt)
                 .build();

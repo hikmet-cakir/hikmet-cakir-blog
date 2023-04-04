@@ -1,5 +1,6 @@
 package com.hikmetcakir.domain.article.dto;
 
+import com.hikmetcakir.article.model.Genre;
 import com.hikmetcakir.article.usecase.UpdateArticle;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,10 +14,12 @@ import lombok.NoArgsConstructor;
 public class UpdateArticleRequest {
 
     private String content;
+    private Genre genre;
 
     public UpdateArticle toModel(String id) {
         return UpdateArticle.builder()
                 .id(id)
+                .genre(genre)
                 .content(content)
                 .build();
     }
