@@ -7,14 +7,16 @@ import com.hikmetcakir.common.DomainComponent;
 import com.hikmetcakir.common.UseCaseHandler;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @DomainComponent
 @RequiredArgsConstructor
-public class QueryArticleUseCaseHandler implements UseCaseHandler<Article, QueryArticle> {
+public class QueryArticleUseCaseHandler implements UseCaseHandler<List<Article>, QueryArticle> {
 
     private final ArticlePort articlePort;
 
     @Override
-    public Article handle(QueryArticle useCase) {
+    public List<Article> handle(QueryArticle useCase) {
         return articlePort.query(useCase);
     }
 }

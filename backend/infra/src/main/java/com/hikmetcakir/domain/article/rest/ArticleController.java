@@ -25,8 +25,8 @@ public class ArticleController extends BaseController implements ArticleApi {
 
     @Override
     public Response<QueryArticleResponse> queryArticle(QueryArticleRequest queryArticleRequest) {
-        var article = queryArticleUseCaseHandler.handle(queryArticleRequest.toModel());
-        return respond(QueryArticleResponse.fromModel(article));
+        var articles = queryArticleUseCaseHandler.handle(queryArticleRequest.toModel());
+        return respond(QueryArticleResponse.fromModel(articles));
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.model.Genre;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@FieldNameConstants
 @Table(name = "article")
 public class ArticleEntity {
 

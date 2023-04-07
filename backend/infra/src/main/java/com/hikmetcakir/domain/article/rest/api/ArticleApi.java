@@ -16,7 +16,7 @@ public interface ArticleApi {
             @ApiResponse(code = 500, message = "Internal Error")
     })
     @RequestMapping(value = "/article", method = RequestMethod.GET)
-    Response<QueryArticleResponse> queryArticle(@RequestParam(value = "id") QueryArticleRequest queryArticleRequest);
+    Response<QueryArticleResponse> queryArticle(@RequestBody QueryArticleRequest queryArticleRequest);
 
     @ApiOperation(value = "Delete Article", nickname = "deleteArticle", notes = "", response = Void.class, tags = {"Delete", "Article"})
     @ApiResponses(value = {

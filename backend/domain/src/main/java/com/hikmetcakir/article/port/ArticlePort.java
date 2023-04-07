@@ -6,6 +6,8 @@ import com.hikmetcakir.article.usecase.QueryArticle;
 import com.hikmetcakir.article.usecase.UpdateArticle;
 import com.hikmetcakir.article.usecase.UploadArticle;
 
+import java.util.List;
+
 public interface ArticlePort {
 
     Article upload(UploadArticle uploadArticle);
@@ -14,5 +16,5 @@ public interface ArticlePort {
 
     void update(UpdateArticle updateArticle);
 
-    Article query(QueryArticle queryArticle);
+    List<Article> query(QueryArticle queryArticle);
 }

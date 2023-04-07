@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,15 +40,10 @@ public class ArticleDataAdapter implements ArticlePort {
     }
 
     @Override
-    public Article query(QueryArticle queryArticle) {
-        Article article = cachePort.getValue(queryArticle.getId(), Article.class);
-        if(Objects.isNull(article)) {
-            article = articleJpaRepository.findById(queryArticle.getId())
-                    .map(ArticleEntity::toModel)
-                    .orElseThrow(() -> new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND));
-            cachePort.putValue(article.getId(), article);
-        }
-        return article;
+    public List<Article> query(QueryArticle queryArticle) {
+        return articleJpaRepository.queryArticle(queryArticle).stream()
+                .map(ArticleEntity::toModel)
+                .collect(Collectors.toList());
     }
 
     @Override
