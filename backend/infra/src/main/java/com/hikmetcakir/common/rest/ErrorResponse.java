@@ -1,4 +1,4 @@
-package com.hikmetcakir.common;
+package com.hikmetcakir.common.rest;
 
 public class ErrorResponse {
 

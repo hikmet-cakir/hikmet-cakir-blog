@@ -14,5 +14,7 @@ public class QueryArticle implements UseCase {
     private String id;
     private String content;
     private Genre genre;
+    private int page;
+    private int size;
     private LocalDateTime createdAt;
 }

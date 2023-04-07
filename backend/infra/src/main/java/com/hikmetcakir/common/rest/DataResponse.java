@@ -1,4 +1,4 @@
-package com.hikmetcakir.common;
+package com.hikmetcakir.common.rest;
 
 import java.util.List;
 import java.util.Objects;

@@ -2,10 +2,8 @@ package com.hikmetcakir.domain.article.dto;
 
 import com.hikmetcakir.article.model.Genre;
 import com.hikmetcakir.article.usecase.QueryArticle;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.hikmetcakir.common.rest.PageRequest;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueryArticleRequest {
+@EqualsAndHashCode(callSuper = true)
+public class QueryArticleRequest extends PageRequest {
 
     private String id;
     private String content;
@@ -25,6 +24,8 @@ public class QueryArticleRequest {
                 .id(id)
                 .content(content)
                 .genre(genre)
+                .size(this.getSize())
+                .page(this.getPage())
                 .createdAt(createdAt)
                 .build();
     }
