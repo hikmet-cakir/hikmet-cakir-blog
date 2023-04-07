@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Article {
 
     private String id;
+    private String title;
     private String content;
     private Genre genre;
     private LocalDateTime updatedAt;

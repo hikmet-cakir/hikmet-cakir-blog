@@ -16,6 +16,9 @@ import javax.persistence.*;
 @Table(name = "article")
 public class ArticleEntity extends AbstractEntity {
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name =  "content")
     private String content;
 
@@ -28,6 +31,7 @@ public class ArticleEntity extends AbstractEntity {
                 .id(this.getId())
                 .content(content)
                 .genre(genre)
+                .title(title)
                 .updatedAt(this.getUpdatedAt())
                 .createdAt(this.getCreatedAt())
                 .build();

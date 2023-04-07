@@ -13,12 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateArticleRequest {
 
+    private String title;
     private String content;
     private Genre genre;
 
     public UpdateArticle toModel(String id) {
         return UpdateArticle.builder()
                 .id(id)
+                .title(title)
                 .genre(genre)
                 .content(content)
                 .build();

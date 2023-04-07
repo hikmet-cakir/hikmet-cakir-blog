@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UploadArticleRequest {
 
+    private String title;
     private String content;
     private Genre genre;
 
     public UploadArticle toModel() {
         return UploadArticle.builder()
+                .title(title)
                 .content(content)
                 .genre(genre)
                 .build();

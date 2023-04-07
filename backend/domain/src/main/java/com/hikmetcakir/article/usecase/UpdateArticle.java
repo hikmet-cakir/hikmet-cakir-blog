@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class UpdateArticle implements UseCase {
 
     private String id;
+    private String title;
     private String content;
     private Genre genre;
     private LocalDateTime updatedAt;

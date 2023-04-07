@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 public class UploadArticle implements UseCase {
 
+    private String title;
     private String content;
     private Genre genre;
 }

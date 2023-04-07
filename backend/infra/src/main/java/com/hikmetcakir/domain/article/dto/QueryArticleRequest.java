@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class QueryArticleRequest extends PageRequest {
 
     private String id;
+    private String title;
     private String content;
     private Genre genre;
     private LocalDateTime createdAt;
@@ -22,6 +23,7 @@ public class QueryArticleRequest extends PageRequest {
     public QueryArticle toModel() {
         return QueryArticle.builder()
                 .id(id)
+                .title(title)
                 .content(content)
                 .genre(genre)
                 .size(this.getSize())
