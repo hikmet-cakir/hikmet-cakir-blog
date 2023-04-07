@@ -43,9 +43,16 @@ public class ArticleFakeDataAdapter implements ArticlePort {
     }
 
     @Override
-    public Article query(QueryArticle queryArticle) {
-        failedArticleScenario(queryArticle.getId());
-        return succeededArticleScenario(queryArticle.getId());
+    public List<Article> query(QueryArticle queryArticle) {
+        if(FAILING_IDS.contains(queryArticle.getId())) {
+            throw new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND);
+        }
+        return List.of(Article.builder()
+                .id(UUID.randomUUID().toString())
+                .content(UUID.randomUUID().toString())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build());
     }
 
     private void failedArticleScenario(String id) {
