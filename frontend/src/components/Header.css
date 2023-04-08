@@ -1,16 +1,29 @@
-.header {
-    width: 100%;
-    background: #080008;
-}
+.header-design {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .left-button {
+    order: 1;
+  }
+  
+  .right-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    order: 2;
+  }
+  
+  .right-buttons a {
+    color: white;
+    margin-left: 20px;
+  }
 
-.nav-links li {
-    display: inline-block;
-    margin: 1%;
-    color: #fff;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: #fff; 
-}
- 
+  .left-buttons a {
+    color: white;
+    margin-left: 20px;
+  }

@@ -2,16 +2,18 @@ import './Header.css';
 
 function Header() {
   return (
-    <header class="header">
-      <ul class="nav-links">
-        <li><a href="/">Hikmet Cakir</a></li> 
-        <li style={{float: 'right'}}><a href="/algorithm">Algorithm</a></li>
-        <li style={{float: 'right'}}><a href="/sql">SQL</a></li> 
-        <li style={{float: 'right'}}><a href="/spring">Spring</a></li> 
-        <li style={{float: 'right'}}><a href="/java">Java</a></li> 
-      </ul>
+    <header className="header-design">
+      <div className="left-buttons">
+        <a href="/">Hikmet Cakir</a>
+      </div>
+      <div className="right-buttons">
+        <a href="/java">Java</a>
+        <a href="/spring">Spring</a>
+        <a href="/sql">SQL</a>
+        <a href="/algorithm">Algorithm</a>
+      </div>
     </header>
   );
 }
 
-export default Header
+export default Header;
