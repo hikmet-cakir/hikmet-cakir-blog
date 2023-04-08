@@ -19,7 +19,7 @@ function Genre() {
         const params = new URLSearchParams({
           genre: genre,
           size: 10,
-          page: activePage - 1 // Adjust page number for API request
+          page: activePage - 1
         });
         const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
         if (!response.ok) {
@@ -36,27 +36,29 @@ function Genre() {
 
   return (
     <div>
-      <Header />
+      <Header/>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card.Group style={{ display: 'block' }}>
+      <Card.Group style={{ display: 'block' }}>
           {data.length > 0 &&
             data.map((item) => (
               <Card key={item.id}>
                 <Card.Content>
                   <Card.Header>{item.title}</Card.Header>
                   <Card.Meta>{item.content}</Card.Meta>
-                  <Card.Description>{item.genre}</Card.Description>
-                  <Button
-                  primary
-                  onClick={() => {
-                    window.location.href = `/article/${genre}/${item.id}`;
-                  }}
-                  >
-                  Read More
-                </Button>
-                </Card.Content>
-              </Card>
-            ))}
+                  <Card.Description><b>Genre: </b>{item.genre}</Card.Description>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <Button
+                    primary
+                    onClick={() => {
+                      window.location.href = `/article/${item.genre}/${item.id}`;
+                    }}
+                    >
+                    Read More
+                    </Button>
+                  </div>
+              </Card.Content>
+          </Card>
+        ))}
         </Card.Group>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
