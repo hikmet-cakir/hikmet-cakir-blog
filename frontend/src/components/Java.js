@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 import Header from './Header';
 
 function Java() {
@@ -10,7 +10,7 @@ function Java() {
       try {
         const params = new URLSearchParams({
           genre: 'JAVA',
-          size: 1,
+          size: 3,
           page: 1
         });
         const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
@@ -30,21 +30,31 @@ function Java() {
   }, []);
 
   return (
-    <java>
+    <div>
       <Header />
-      <Card.Group>
-        {data.length > 0 &&
-          data.map((item) => (
-            <Card key={item.id}>
-              <Card.Content>
-                <Card.Header>{item.title}</Card.Header>
-                <Card.Meta>{item.content}</Card.Meta>
-                <Card.Description>{item.genre}</Card.Description>
-              </Card.Content>
-            </Card>
-          ))}
-      </Card.Group>
-    </java>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Card.Group style={{ display: 'block' }}>
+          {data.length > 0 &&
+            data.map((item) => (
+              <Card key={item.id}>
+                <Card.Content>
+                  <Card.Header>{item.title}</Card.Header>
+                  <Card.Meta>{item.content}</Card.Meta>
+                  <Card.Description>{item.genre}</Card.Description>
+                  <Button
+                  primary
+                  onClick={() => {
+                    window.location.href = `/article/${item.id}`;
+                  }}
+                  >
+                  Read More
+                </Button>
+                </Card.Content>
+              </Card>
+            ))}
+        </Card.Group>
+      </div>
+    </div>
   );
 }
 
