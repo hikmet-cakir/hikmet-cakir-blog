@@ -1,41 +1,49 @@
+import React, { useEffect, useState } from 'react';
+import { Card } from 'semantic-ui-react';
 import Header from './Header';
-import React from "react";
-import axios from "axios";
-import { Card, Container, Icon } from 'semantic-ui-react'
-
 
 function Java() {
-  const [post, setPost] = React.useState(null);
-  const baseURL = "http://localhost:8080/article?id=9c1e2c06-5790-438c-b757-dd7adf9dce3f";
+  const [data, setData] = useState([]);
 
-  const description = [
-    'Amy is a violinist with 2 years experience in the wedding industry.',
-    'She enjoys the outdoors and currently resides in upstate New York.',
-  ].join(' ')
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const params = new URLSearchParams({
+          genre: 'JAVA',
+          size: 1,
+          page: 1
+        });
+        const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
 
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setPost(response.data);
-      console.log(response.data);
-    });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const responseData = await response.json();
+        setData(responseData.data.articles);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
-  if (!post) return null;
-  
   return (
     <java>
-        <Header/> 
-        <Container> 
-        <div class="ui centered fluid card"> 
-          <Card>
-            <Card.Content header='Reflection API' />
-            <Card.Content description={description} />
-            <Card.Content extra>
-            <Icon name='angle right'>Go</Icon>
-            </Card.Content>
-          </Card>
-      </div>
-      </Container>
+      <Header />
+      <Card.Group>
+        {data.length > 0 &&
+          data.map((item) => (
+            <Card key={item.id}>
+              <Card.Content>
+                <Card.Header>{item.title}</Card.Header>
+                <Card.Meta>{item.content}</Card.Meta>
+                <Card.Description>{item.genre}</Card.Description>
+              </Card.Content>
+            </Card>
+          ))}
+      </Card.Group>
     </java>
   );
 }
