@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'semantic-ui-react';
 import Header from './Header';
+import { useParams } from 'react-router-dom';
 
-function Java() {
+function Genre() {
   const [data, setData] = useState([]);
+  
+  const { genre } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
         const params = new URLSearchParams({
-          genre: 'JAVA',
+          genre: genre,
           size: 3,
           page: 1
         });
@@ -27,7 +30,7 @@ function Java() {
     }
 
     fetchData();
-  }, []);
+  }, [genre]);
 
   return (
     <div>
@@ -58,4 +61,4 @@ function Java() {
   );
 }
 
-export default Java;
+export default Genre;

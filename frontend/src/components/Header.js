@@ -7,10 +7,10 @@ function Header() {
         <a href="/">Hikmet Cakir</a>
       </div>
       <div className="right-buttons">
-        <a href="/java">Java</a>
-        <a href="/spring">Spring</a>
-        <a href="/sql">SQL</a>
-        <a href="/algorithm">Algorithm</a>
+        <a href="/article/JAVA">Java</a>
+        <a href="/article/SPRING">Spring</a>
+        <a href="/article/SQL">SQL</a>
+        <a href="/article/ALGORITHM">Algorithm</a>
       </div>
     </header>
   );
