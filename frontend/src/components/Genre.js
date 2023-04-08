@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Pagination } from 'semantic-ui-react';
 import Header from './Header';
 import { useParams } from 'react-router-dom';
 
@@ -7,14 +7,19 @@ function Genre() {
 
   const [data, setData] = useState([]);
   const { genre } = useParams();
+  const [activePage, setActivePage] = useState(1);
+
+  const handlePageChange = (event, { activePage }) => {
+    setActivePage(activePage);
+  };
 
   useEffect(() => {
     async function fetchData() {
       try {
         const params = new URLSearchParams({
           genre: genre,
-          size: 3,
-          page: 1
+          size: 10,
+          page: activePage - 1 // Adjust page number for API request
         });
         const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
         if (!response.ok) {
@@ -27,7 +32,7 @@ function Genre() {
       }
     }
     fetchData();
-  }, [genre]);
+  }, [genre, activePage]);
 
   return (
     <div>
@@ -53,6 +58,13 @@ function Genre() {
               </Card>
             ))}
         </Card.Group>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Pagination
+          activePage={activePage}
+          onPageChange={handlePageChange}
+          totalPages={10}
+        />
       </div>
     </div>
   );

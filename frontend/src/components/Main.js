@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Pagination } from 'semantic-ui-react';
 import Header from './Header';
 
 function Main() {
-
   const [data, setData] = useState([]);
+  const [activePage, setActivePage] = useState(1);
+
+  const handlePageChange = (event, { activePage }) => {
+    setActivePage(activePage);
+  };
 
   useEffect(() => {
     async function fetchData() {
       try {
         const params = new URLSearchParams({
           size: 10,
-          page: 0
+          page: activePage - 1 // Adjust page number for API request
         });
         const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
         if (!response.ok) {
@@ -24,7 +28,7 @@ function Main() {
       }
     }
     fetchData();
-  }, []);
+  }, [activePage]);
 
   return (
     <div>
@@ -39,17 +43,24 @@ function Main() {
                   <Card.Meta>{item.content}</Card.Meta>
                   <Card.Description>{item.genre}</Card.Description>
                   <Button
-                  primary
-                  onClick={() => {
-                    window.location.href = `/article/${item.genre}/${item.id}`;
-                  }}
+                    primary
+                    onClick={() => {
+                      window.location.href = `/article/${item.genre}/${item.id}`;
+                    }}
                   >
-                  Read More
-                </Button>
+                    Read More
+                  </Button>
                 </Card.Content>
               </Card>
             ))}
         </Card.Group>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Pagination
+          activePage={activePage}
+          onPageChange={handlePageChange}
+          totalPages={10}
+        />
       </div>
     </div>
   );
