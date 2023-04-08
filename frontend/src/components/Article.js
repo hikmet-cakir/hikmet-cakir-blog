@@ -16,11 +16,9 @@ function Article() {
           page: 0
         });
         const response = await fetch(`http://localhost:8080/article?${params.toString()}`);
-
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
         const responseData = await response.json();
         setData(responseData.data.articles);
       } catch (error) {
