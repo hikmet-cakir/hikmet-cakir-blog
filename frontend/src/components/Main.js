@@ -42,7 +42,7 @@ function Main() {
                   <Button
                   primary
                   onClick={() => {
-                    window.location.href = `/article/${item.id}`;
+                    window.location.href = `/article/${item.genre}/${item.id}`;
                   }}
                   >
                   Read More

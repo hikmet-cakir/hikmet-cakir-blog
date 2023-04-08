@@ -47,7 +47,7 @@ function Genre() {
                   <Button
                   primary
                   onClick={() => {
-                    window.location.href = `/article/${item.id}`;
+                    window.location.href = `/article/${genre}/${item.id}`;
                   }}
                   >
                   Read More
