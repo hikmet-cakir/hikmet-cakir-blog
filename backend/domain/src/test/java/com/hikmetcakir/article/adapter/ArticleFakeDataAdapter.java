@@ -1,4 +1,4 @@
-package com.hikmetcakir.adapter;
+package com.hikmetcakir.article.adapter;
 
 import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.port.ArticlePort;

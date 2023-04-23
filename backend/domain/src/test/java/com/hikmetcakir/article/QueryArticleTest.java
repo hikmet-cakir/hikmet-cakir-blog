@@ -1,7 +1,6 @@
-package com.hikmetcakir;
+package com.hikmetcakir.article;
 
-import com.hikmetcakir.adapter.ArticleFakeDataAdapter;
-import com.hikmetcakir.article.QueryArticleUseCaseHandler;
+import com.hikmetcakir.article.adapter.ArticleFakeDataAdapter;
 import com.hikmetcakir.article.usecase.QueryArticle;
 import com.hikmetcakir.common.exception.ArticleException;
 import org.junit.jupiter.api.BeforeEach;

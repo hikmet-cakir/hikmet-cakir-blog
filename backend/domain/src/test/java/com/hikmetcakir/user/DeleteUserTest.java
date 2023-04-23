@@ -1,9 +1,11 @@
-package com.hikmetcakir;
+package com.hikmetcakir.user;
 
-import com.hikmetcakir.adapter.ArticleFakeDataAdapter;
 import com.hikmetcakir.article.DeleteArticleUseCaseHandler;
 import com.hikmetcakir.article.usecase.DeleteArticle;
 import com.hikmetcakir.common.exception.ArticleException;
+import com.hikmetcakir.common.exception.UserException;
+import com.hikmetcakir.user.adapter.UserFakeDataAdapter;
+import com.hikmetcakir.user.usecase.DeleteUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,38 +14,38 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-public class DeleteArticleTest {
+public class DeleteUserTest {
 
-    DeleteArticleUseCaseHandler deleteArticleUseCase;
+    DeleteUserUseCaseHandler deleteUserUseCaseHandler;
 
     @BeforeEach
     void setUp() {
-        deleteArticleUseCase = new DeleteArticleUseCaseHandler(new ArticleFakeDataAdapter());
+        deleteUserUseCaseHandler = new DeleteUserUseCaseHandler(new UserFakeDataAdapter());
     }
 
     @Test
-    void when_givenArticleWithExistId_expect_noException() {
+    void when_givenUserWithExistId_expect_noException() {
         // Given
-        DeleteArticle given = DeleteArticle.builder()
+        DeleteUser given = DeleteUser.builder()
                 .id(UUID.randomUUID().toString())
                 .build();
 
         // When
-        deleteArticleUseCase.handle(given);
+        deleteUserUseCaseHandler.handle(given);
 
         // Then
         assertThatNoException();
     }
 
     @Test
-    void when_givenArticleWithNonExistId_expect_throwArticleException() {
+    void when_givenUserWithNonExistId_expect_throwUserException() {
         // Given
-        DeleteArticle given = DeleteArticle.builder()
+        DeleteUser given = DeleteUser.builder()
                 .id("1a2b3c4d-1234-5678-1234-12345abcde99")
                 .build();
 
         // When
-        assertThatExceptionOfType(ArticleException.class)
-                .isThrownBy(() -> deleteArticleUseCase.handle(given));
+        assertThatExceptionOfType(UserException.class)
+                .isThrownBy(() -> deleteUserUseCaseHandler.handle(given));
     }
 }
