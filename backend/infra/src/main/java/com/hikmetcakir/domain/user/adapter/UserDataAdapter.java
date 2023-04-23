@@ -1,6 +1,6 @@
 package com.hikmetcakir.domain.user.adapter;
 
-import com.hikmetcakir.article.port.CachePort;
+import com.hikmetcakir.common.port.CachePort;
 import com.hikmetcakir.common.exception.UserException;
 import com.hikmetcakir.common.exception.enums.ApiExceptionUser;
 import com.hikmetcakir.domain.user.jpa.entity.UserEntity;

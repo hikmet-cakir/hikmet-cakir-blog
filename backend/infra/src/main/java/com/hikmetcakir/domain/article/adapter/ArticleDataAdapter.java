@@ -2,7 +2,7 @@ package com.hikmetcakir.domain.article.adapter;
 
 import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.port.ArticlePort;
-import com.hikmetcakir.article.port.CachePort;
+import com.hikmetcakir.common.port.CachePort;
 import com.hikmetcakir.article.usecase.DeleteArticle;
 import com.hikmetcakir.article.usecase.QueryArticle;
 import com.hikmetcakir.article.usecase.UpdateArticle;

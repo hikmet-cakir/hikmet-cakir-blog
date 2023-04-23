@@ -1,4 +1,4 @@
-package com.hikmetcakir.article.port;
+package com.hikmetcakir.common.port;
 
 public interface CachePort {
 

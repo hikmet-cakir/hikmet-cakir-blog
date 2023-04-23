@@ -1,7 +1,7 @@
-package com.hikmetcakir.domain.article.adapter;
+package com.hikmetcakir.common.adapter;
 
 import com.google.gson.Gson;
-import com.hikmetcakir.article.port.CachePort;
+import com.hikmetcakir.common.port.CachePort;
 import com.hikmetcakir.configuration.RedisConfigurationProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
