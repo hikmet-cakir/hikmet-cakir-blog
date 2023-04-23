@@ -9,10 +9,13 @@ import com.hikmetcakir.user.model.User;
 import com.hikmetcakir.user.port.UserPort;
 import com.hikmetcakir.user.usecase.DeleteUser;
 import com.hikmetcakir.user.usecase.QueryUser;
+import com.hikmetcakir.user.usecase.UploadUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +39,18 @@ public class UserDataAdapter implements UserPort {
                 .orElseThrow(() -> new UserException(ApiExceptionUser.USER_NOT_FOUND));
         userJpaRepository.delete(userEntity);
         cachePort.deleteValue(userEntity.getId());
+    }
+
+    @Override
+    public User upload(UploadUser uploadUser) {
+        var userEntity = new UserEntity();
+        userEntity.setId(UUID.randomUUID().toString());
+        userEntity.setName(uploadUser.getName());
+        userEntity.setLastName(uploadUser.getLastName());
+        userEntity.setUpdatedAt(LocalDateTime.now());
+        userEntity.setCreatedAt(LocalDateTime.now());
+        var user = userJpaRepository.save(userEntity).toModel();
+        cachePort.putValue(user.getId(), user);
+        return user;
     }
 }
