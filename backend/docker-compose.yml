@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+    mysql:
+        image: mysql:5.7
+        restart: always
+        ports:
+            - "3307:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: hikmetcakir
+            MYSQL_USER: hikmetcakir
+            MYSQL_PASSWORD: root
+        networks:
+            - hikmetcakirblog_network
+            
+    redis:
+        image: "redis/redis-stack:latest"
+        restart: always
+        ports:
+            - "6379:6379"
+        networks:
+            - hikmetcakirblog_network
+
+volumes:
+    mysql_data:
+    
+
+networks:
+    hikmetcakirblog_network:
+        driver: bridge
+ 
