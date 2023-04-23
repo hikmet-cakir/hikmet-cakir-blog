@@ -23,11 +23,15 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "password")
+    private String password;
+
     public User toModel() {
         return User.builder()
                 .id(this.getId())
                 .name(name)
                 .lastName(lastName)
+                .password(password)
                 .updatedAt(this.getUpdatedAt())
                 .createdAt(this.getCreatedAt())
                 .build();

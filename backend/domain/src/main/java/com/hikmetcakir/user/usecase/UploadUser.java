@@ -10,4 +10,5 @@ public class UploadUser implements UseCase {
 
     private String name;
     private String lastName;
+    private String password;
 }

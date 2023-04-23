@@ -16,12 +16,14 @@ public class UpdateUserRequest {
 
     private String name;
     private String lastName;
+    private String password;
 
     public UpdateUser toModel(String id) {
         return UpdateUser.builder()
                 .id(id)
                 .name(name)
                 .lastName(lastName)
+                .password(password)
                 .build();
     }
 }

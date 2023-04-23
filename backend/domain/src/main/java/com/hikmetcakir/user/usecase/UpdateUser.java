@@ -13,5 +13,6 @@ public class UpdateUser implements UseCase {
     private String id;
     private String name;
     private String lastName;
+    private String password;
     private LocalDateTime updatedAt;
 }

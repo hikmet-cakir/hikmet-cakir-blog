@@ -14,11 +14,13 @@ public class UploadUserRequest {
 
     private String name;
     private String lastName;
+    private String password;
 
     public UploadUser toModel() {
         return UploadUser.builder()
                 .name(name)
                 .lastName(lastName)
+                .password(password)
                 .build();
     }
 }
