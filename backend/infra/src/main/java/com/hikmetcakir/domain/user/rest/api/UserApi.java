@@ -1,6 +1,7 @@
 package com.hikmetcakir.domain.user.rest.api;
 
 import com.hikmetcakir.common.rest.Response;
+import com.hikmetcakir.domain.article.dto.UpdateArticleRequest;
 import com.hikmetcakir.domain.article.dto.UploadArticleResponse;
 import com.hikmetcakir.domain.user.dto.*;
 import io.swagger.annotations.ApiOperation;
@@ -38,4 +39,13 @@ public interface UserApi {
     })
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     Response<UploadUserResponse> uploadUser(@RequestBody UploadUserRequest uploadUserRequest);
+
+    @ApiOperation(value = "Update User", nickname = "updateUser", notes = "", response = Void.class, tags = {"Update", "User"})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful operation", response = Void.class),
+            @ApiResponse(code = 400, message = "Invalid Params"),
+            @ApiResponse(code = 500, message = "Internal Error")
+    })
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PATCH)
+    void updateUser(@PathVariable String id, @RequestBody UpdateUserRequest updateUserRequest);
 }

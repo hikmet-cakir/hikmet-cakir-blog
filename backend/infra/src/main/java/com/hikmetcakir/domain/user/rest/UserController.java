@@ -6,6 +6,7 @@ import com.hikmetcakir.domain.user.dto.*;
 import com.hikmetcakir.domain.user.rest.api.UserApi;
 import com.hikmetcakir.user.DeleteUserUseCaseHandler;
 import com.hikmetcakir.user.QueryUserUseCaseHandler;
+import com.hikmetcakir.user.UpdateUserUseCaseHandler;
 import com.hikmetcakir.user.UploadUserUseCaseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,8 @@ public class UserController extends BaseController implements UserApi {
     private final DeleteUserUseCaseHandler deleteUserUseCaseHandler;
 
     private final UploadUserUseCaseHandler uploadUserUseCaseHandler;
+
+    private final UpdateUserUseCaseHandler updateUserUseCaseHandler;
 
     @Override
     public Response<QueryUserResponse> queryUser(QueryUserRequest queryUserRequest) {
@@ -36,5 +39,10 @@ public class UserController extends BaseController implements UserApi {
     public Response<UploadUserResponse> uploadUser(UploadUserRequest uploadUserRequest) {
         var user = uploadUserUseCaseHandler.handle(uploadUserRequest.toModel());
         return respond(UploadUserResponse.fromModel(user));
+    }
+
+    @Override
+    public void updateUser(String id, UpdateUserRequest updateUserRequest) {
+        updateUserUseCaseHandler.handle(updateUserRequest.toModel(id));
     }
 }
