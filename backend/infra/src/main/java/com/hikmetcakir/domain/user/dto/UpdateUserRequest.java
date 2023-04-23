@@ -14,16 +14,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateUserRequest {
 
+    private String userId;
+    private String password;
     private String name;
     private String lastName;
-    private String password;
 
     public UpdateUser toModel(String id) {
         return UpdateUser.builder()
                 .id(id)
+                .userId(userId)
+                .password(password)
                 .name(name)
                 .lastName(lastName)
-                .password(password)
                 .build();
     }
 }

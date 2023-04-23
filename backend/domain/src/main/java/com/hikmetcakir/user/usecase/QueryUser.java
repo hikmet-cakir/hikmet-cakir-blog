@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class QueryUser implements UseCase {
 
     private String id;
+    private String userId;
     private String name;
     private String lastName;
     private int page;

@@ -8,7 +8,8 @@ import lombok.Data;
 @Builder
 public class UploadUser implements UseCase {
 
+    private String userId;
+    private String password;
     private String name;
     private String lastName;
-    private String password;
 }

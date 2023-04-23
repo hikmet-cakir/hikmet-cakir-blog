@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class QueryUserRequest extends PageRequest {
 
     private String id;
+    private String userId;
     private String name;
     private String lastName;
     private LocalDateTime createdAt;
@@ -21,6 +22,7 @@ public class QueryUserRequest extends PageRequest {
     public QueryUser toModel() {
         return QueryUser.builder()
                 .id(id)
+                .userId(userId)
                 .name(name)
                 .lastName(lastName)
                 .createdAt(createdAt)

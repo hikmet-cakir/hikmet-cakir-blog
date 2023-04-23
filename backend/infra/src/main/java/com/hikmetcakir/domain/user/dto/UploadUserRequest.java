@@ -12,15 +12,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UploadUserRequest {
 
+    private String userId;
+    private String password;
     private String name;
     private String lastName;
-    private String password;
 
     public UploadUser toModel() {
         return UploadUser.builder()
+                .userId(userId)
+                .password(password)
                 .name(name)
                 .lastName(lastName)
-                .password(password)
                 .build();
     }
 }

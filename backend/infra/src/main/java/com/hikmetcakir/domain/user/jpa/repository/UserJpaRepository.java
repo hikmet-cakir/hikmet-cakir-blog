@@ -26,6 +26,10 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, String>, Jp
                 predicates.add(builder.equal(root.get(AbstractEntity.Fields.id), queryUser.getId()));
             }
 
+            if(queryUser.getUserId() != null) {
+                predicates.add(builder.equal(root.get(UserEntity.Fields.userId), queryUser.getUserId()));
+            }
+
             if(queryUser.getName() != null) {
                 predicates.add(builder.like(root.get(UserEntity.Fields.name), "%" + queryUser.getName() + "%"));
             }

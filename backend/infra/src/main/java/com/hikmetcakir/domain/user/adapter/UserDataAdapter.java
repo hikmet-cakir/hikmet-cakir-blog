@@ -46,9 +46,10 @@ public class UserDataAdapter implements UserPort {
     public User upload(UploadUser uploadUser) {
         var userEntity = new UserEntity();
         userEntity.setId(UUID.randomUUID().toString());
+        userEntity.setUserId(uploadUser.getUserId());
+        userEntity.setPassword(uploadUser.getPassword());
         userEntity.setName(uploadUser.getName());
         userEntity.setLastName(uploadUser.getLastName());
-        userEntity.setPassword(uploadUser.getPassword());
         userEntity.setUpdatedAt(LocalDateTime.now());
         userEntity.setCreatedAt(LocalDateTime.now());
         var user = userJpaRepository.save(userEntity).toModel();
@@ -60,9 +61,10 @@ public class UserDataAdapter implements UserPort {
     public void update(UpdateUser updateUser) {
         var userEntity = userJpaRepository.findById(updateUser.getId())
                 .orElseThrow(() -> new UserException(ApiExceptionUser.USER_NOT_FOUND));
+        userEntity.setUserId(updateUser.getUserId());
+        userEntity.setPassword(updateUser.getPassword());
         userEntity.setName(updateUser.getName());
         userEntity.setLastName(updateUser.getLastName());
-        userEntity.setPassword(updateUser.getPassword());
         userEntity.setUpdatedAt(updateUser.getUpdatedAt());
         userJpaRepository.save(userEntity);
         cachePort.putValue(updateUser.getId(), userEntity.toModel());

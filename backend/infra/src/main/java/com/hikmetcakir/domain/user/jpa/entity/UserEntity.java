@@ -17,21 +17,25 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class UserEntity extends AbstractEntity {
 
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "password")
-    private String password;
-
     public User toModel() {
         return User.builder()
                 .id(this.getId())
+                .userId(userId)
+                .password(password)
                 .name(name)
                 .lastName(lastName)
-                .password(password)
                 .updatedAt(this.getUpdatedAt())
                 .createdAt(this.getCreatedAt())
                 .build();
