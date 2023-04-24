@@ -14,7 +14,7 @@ public interface ArticlePort {
 
     void delete(DeleteArticle deleteArticle);
 
-    void update(UpdateArticle updateArticle);
+    Article update(UpdateArticle updateArticle);
 
     List<Article> query(QueryArticle queryArticle);
 }

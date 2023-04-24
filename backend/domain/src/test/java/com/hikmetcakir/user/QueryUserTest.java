@@ -25,27 +25,32 @@ public class QueryUserTest {
 
     @Test
     void when_givenUserWithExistId_expect_noException() {
-        // Given
+        //region Given
         QueryUser given = QueryUser.builder()
                 .id(UUID.randomUUID().toString())
                 .build();
+        //endregion
 
-        // When
+        //region When
         queryUserUseCaseHandler.handle(given);
+        //endregion
 
-        // Then
+        //region Then
         assertThatNoException();
+        //endregion
     }
 
     @Test
     void when_givenUserWithNonExistId_expect_throwUserException() {
-        // Given
+        //region Given
         QueryUser given = QueryUser.builder()
                 .id("1a2b3c4d-1234-5678-1234-12345abcde99")
                 .build();
+        //endregion
 
-        // When
+        //region When
         assertThatExceptionOfType(UserException.class)
                 .isThrownBy(() -> queryUserUseCaseHandler.handle(given));
+        //endregion
     }
 }

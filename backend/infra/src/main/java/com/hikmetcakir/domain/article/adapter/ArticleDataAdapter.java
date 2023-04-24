@@ -56,7 +56,7 @@ public class ArticleDataAdapter implements ArticlePort {
     }
 
     @Override
-    public void update(UpdateArticle updateArticle) {
+    public Article update(UpdateArticle updateArticle) {
         var articleEntity = articleJpaRepository.findById(updateArticle.getId())
                 .orElseThrow(() -> new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND));
         articleEntity.setTitle(updateArticle.getTitle());
@@ -65,5 +65,6 @@ public class ArticleDataAdapter implements ArticlePort {
         articleEntity.setUpdatedAt(updateArticle.getUpdatedAt());
         articleJpaRepository.save(articleEntity);
         cachePort.putValue(updateArticle.getId(), articleEntity.toModel());
+        return articleEntity.toModel();
     }
 }

@@ -1,8 +1,5 @@
 package com.hikmetcakir.user;
 
-import com.hikmetcakir.article.UploadArticleUseCaseHandler;
-import com.hikmetcakir.article.model.Article;
-import com.hikmetcakir.article.usecase.UploadArticle;
 import com.hikmetcakir.user.adapter.UserFakeDataAdapter;
 import com.hikmetcakir.user.model.User;
 import com.hikmetcakir.user.usecase.UploadUser;
@@ -22,16 +19,19 @@ class UploadUserTest {
 
     @Test
     void when_givenContent_expect_takeSavedArticle() {
-        // Given
+        //region Given
         String content = "HelloWorld";
         UploadUser given = UploadUser.builder()
                 .name(content)
                 .build();
+        //endregion
 
-        // When
+        //region When
         var actual = uploadUserUseCase.handle(given);
+        //endregion
 
-        // Then
+        //region Then
         assertThat(actual).isNotNull().returns(content, User::getName);
+        //endregion
     }
 }

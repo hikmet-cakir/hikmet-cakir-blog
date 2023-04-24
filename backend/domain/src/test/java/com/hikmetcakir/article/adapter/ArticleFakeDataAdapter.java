@@ -25,6 +25,8 @@ public class ArticleFakeDataAdapter implements ArticlePort {
         return Article.builder()
                 .id(UUID.randomUUID().toString())
                 .content(uploadArticle.getContent())
+                .title(uploadArticle.getTitle())
+                .genre(uploadArticle.getGenre())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
@@ -37,19 +39,30 @@ public class ArticleFakeDataAdapter implements ArticlePort {
     }
 
     @Override
-    public void update(UpdateArticle updateArticle) {
+    public Article update(UpdateArticle updateArticle) {
         failedArticleScenario(updateArticle.getId());
-        succeededArticleScenario(updateArticle.getId());
+        return Article.builder()
+                .id(UUID.randomUUID().toString())
+                .content(updateArticle.getContent())
+                .title(updateArticle.getTitle())
+                .genre(updateArticle.getGenre())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
     }
 
     @Override
     public List<Article> query(QueryArticle queryArticle) {
-        if(FAILING_IDS.contains(queryArticle.getId())) {
+        boolean isFailingId = FAILING_IDS.stream()
+                .anyMatch(failingId -> failingId.equals(queryArticle.getId()));
+        if(isFailingId) {
             throw new ArticleException(ApiExceptionArticle.ARTICLE_NOT_FOUND);
         }
         return List.of(Article.builder()
                 .id(UUID.randomUUID().toString())
-                .content(UUID.randomUUID().toString())
+                .content(queryArticle.getContent())
+                .genre(queryArticle.getGenre())
+                .title(queryArticle.getTitle())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build());

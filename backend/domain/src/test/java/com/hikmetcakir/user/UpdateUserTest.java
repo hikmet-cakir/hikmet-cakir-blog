@@ -1,11 +1,7 @@
 package com.hikmetcakir.user;
 
-import com.hikmetcakir.article.UpdateArticleUseCaseHandler;
-import com.hikmetcakir.article.usecase.UpdateArticle;
-import com.hikmetcakir.common.exception.ArticleException;
 import com.hikmetcakir.common.exception.UserException;
 import com.hikmetcakir.user.adapter.UserFakeDataAdapter;
-import com.hikmetcakir.user.model.User;
 import com.hikmetcakir.user.usecase.UpdateUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +23,7 @@ public class UpdateUserTest {
 
     @Test
     void when_givenUserWithExistId_expect_noException() {
-        // Given
+        //region Given
         UpdateUser given = UpdateUser.builder()
                 .id(UUID.randomUUID().toString())
                 .name("John")
@@ -36,17 +32,20 @@ public class UpdateUserTest {
                 .password(UUID.randomUUID().toString())
                 .updatedAt(LocalDateTime.now())
                 .build();
+        //endregion
 
-        // When
+        //region When
         updateUserUseCase.handle(given);
+        //endregion
 
-        // Then
+        //region Then
         assertThatNoException();
+        //endregion
     }
 
     @Test
     void when_givenUserWithNonExistId_expect_throwUserException() {
-        // Given
+        //region Given
         UpdateUser given = UpdateUser.builder()
                 .id("1a2b3c4d-1234-5678-1234-12345abcde99")
                 .name("John")
@@ -55,9 +54,11 @@ public class UpdateUserTest {
                 .password(UUID.randomUUID().toString())
                 .updatedAt(LocalDateTime.now())
                 .build();
+        //endregion
 
-        // When
+        //region When
         assertThatExceptionOfType(UserException.class)
                 .isThrownBy(() -> updateUserUseCase.handle(given));
+        //endregion
     }
 }

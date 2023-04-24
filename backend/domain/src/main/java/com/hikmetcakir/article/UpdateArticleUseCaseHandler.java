@@ -1,19 +1,20 @@
 package com.hikmetcakir.article;
 
+import com.hikmetcakir.article.model.Article;
 import com.hikmetcakir.article.port.ArticlePort;
 import com.hikmetcakir.article.usecase.UpdateArticle;
 import com.hikmetcakir.common.DomainComponent;
-import com.hikmetcakir.common.VoidUseCaseHandler;
+import com.hikmetcakir.common.UseCaseHandler;
 import lombok.RequiredArgsConstructor;
 
 @DomainComponent
 @RequiredArgsConstructor
-public class UpdateArticleUseCaseHandler implements VoidUseCaseHandler<UpdateArticle> {
+public class UpdateArticleUseCaseHandler implements UseCaseHandler<Article, UpdateArticle> {
 
     private final ArticlePort articlePort;
 
     @Override
-    public void handle(UpdateArticle useCase) {
-        articlePort.update(useCase);
+    public Article handle(UpdateArticle useCase) {
+        return articlePort.update(useCase);
     }
 }

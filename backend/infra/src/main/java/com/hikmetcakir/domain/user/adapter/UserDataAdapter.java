@@ -58,7 +58,7 @@ public class UserDataAdapter implements UserPort {
     }
 
     @Override
-    public void update(UpdateUser updateUser) {
+    public User update(UpdateUser updateUser) {
         var userEntity = userJpaRepository.findById(updateUser.getId())
                 .orElseThrow(() -> new UserException(ApiExceptionUser.USER_NOT_FOUND));
         userEntity.setUserId(updateUser.getUserId());
@@ -68,5 +68,6 @@ public class UserDataAdapter implements UserPort {
         userEntity.setUpdatedAt(updateUser.getUpdatedAt());
         userJpaRepository.save(userEntity);
         cachePort.putValue(updateUser.getId(), userEntity.toModel());
+        return userEntity.toModel();
     }
 }

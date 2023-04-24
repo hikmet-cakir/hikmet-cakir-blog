@@ -39,9 +39,16 @@ public class UserFakeDataAdapter implements UserPort {
     }
 
     @Override
-    public void update(UpdateUser updateUser) {
+    public User update(UpdateUser updateUser) {
         failedUserScenario(updateUser.getId());
-        succeededUserScenario(updateUser.getId());
+        return User.builder()
+                .id(UUID.randomUUID().toString())
+                .name(updateUser.getName())
+                .lastName(updateUser.getLastName())
+                .userId(updateUser.getUserId())
+                .password(updateUser.getPassword())
+                .updatedAt(LocalDateTime.now())
+                .build();
     }
 
     @Override

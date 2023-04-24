@@ -1,7 +1,10 @@
 package com.hikmetcakir.article;
 
 import com.hikmetcakir.article.adapter.ArticleFakeDataAdapter;
+import com.hikmetcakir.article.model.Article;
+import com.hikmetcakir.article.model.Genre;
 import com.hikmetcakir.article.usecase.UpdateArticle;
+import com.hikmetcakir.article.usecase.UploadArticle;
 import com.hikmetcakir.common.exception.ArticleException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,34 +24,47 @@ public class UpdateArticleTest {
     }
 
     @Test
-    void when_givenArticleWithExistId_expect_noException() {
-        // Given
+    void when_givenArticleWithExistId_expect_updateArticleAndNonException() {
+        //region Given
         String content = "HelloWorld!";
         UpdateArticle given = UpdateArticle.builder()
                 .id(UUID.randomUUID().toString())
+                .title("SpringSecurity")
+                .genre(Genre.SPRING)
                 .content(content)
                 .updatedAt(LocalDateTime.now())
                 .build();
+        //endregion
 
-        // When
-        updateArticleUseCase.handle(given);
+        //region When
+        var actual = updateArticleUseCase.handle(given);
+        //endregion
 
-        // Then
+        //region Then
         assertThatNoException();
+        String expectedContent = "HelloWorld!";
+        Genre expectedGenre = Genre.SPRING;
+        String expectedTitle = "SpringSecurity";
+        assertThat(actual).isNotNull().returns(expectedContent, Article::getContent);
+        assertThat(actual).isNotNull().returns(expectedGenre, Article::getGenre);
+        assertThat(actual).isNotNull().returns(expectedTitle, Article::getTitle);
+        //endregion
     }
 
     @Test
     void when_givenArticleWithNonExistId_expect_throwArticleException() {
-        // Given
+        //region Given
         String content = "HelloWorld!";
         UpdateArticle given = UpdateArticle.builder()
                 .id("1a2b3c4d-1234-5678-1234-12345abcde99")
                 .content(content)
                 .updatedAt(LocalDateTime.now())
                 .build();
+        //endregion
 
-        // When
+        //region When
         assertThatExceptionOfType(ArticleException.class)
                 .isThrownBy(() -> updateArticleUseCase.handle(given));
+        //endregion
     }
 }

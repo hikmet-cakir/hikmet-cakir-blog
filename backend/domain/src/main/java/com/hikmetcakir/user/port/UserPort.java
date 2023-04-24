@@ -16,5 +16,5 @@ public interface UserPort {
 
     User upload(UploadUser uploadUser);
 
-    void update(UpdateUser updateUser);
+    User update(UpdateUser updateUser);
 }

@@ -1,19 +1,20 @@
 package com.hikmetcakir.user;
 
 import com.hikmetcakir.common.DomainComponent;
-import com.hikmetcakir.common.VoidUseCaseHandler;
+import com.hikmetcakir.common.UseCaseHandler;
+import com.hikmetcakir.user.model.User;
 import com.hikmetcakir.user.port.UserPort;
 import com.hikmetcakir.user.usecase.UpdateUser;
 import lombok.RequiredArgsConstructor;
 
 @DomainComponent
 @RequiredArgsConstructor
-public class UpdateUserUseCaseHandler implements VoidUseCaseHandler<UpdateUser> {
+public class UpdateUserUseCaseHandler implements UseCaseHandler<User, UpdateUser> {
 
     private final UserPort userPort;
 
     @Override
-    public void handle(UpdateUser useCase) {
-        userPort.update(useCase);
+    public User handle(UpdateUser useCase) {
+        return userPort.update(useCase);
     }
 }

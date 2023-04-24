@@ -1,8 +1,5 @@
 package com.hikmetcakir.user;
 
-import com.hikmetcakir.article.DeleteArticleUseCaseHandler;
-import com.hikmetcakir.article.usecase.DeleteArticle;
-import com.hikmetcakir.common.exception.ArticleException;
 import com.hikmetcakir.common.exception.UserException;
 import com.hikmetcakir.user.adapter.UserFakeDataAdapter;
 import com.hikmetcakir.user.usecase.DeleteUser;
@@ -25,27 +22,32 @@ public class DeleteUserTest {
 
     @Test
     void when_givenUserWithExistId_expect_noException() {
-        // Given
+        //region Given
         DeleteUser given = DeleteUser.builder()
                 .id(UUID.randomUUID().toString())
                 .build();
+        //endregion
 
-        // When
+        //region When
         deleteUserUseCaseHandler.handle(given);
+        //endregion
 
-        // Then
+        //region Then
         assertThatNoException();
+        //endregion
     }
 
     @Test
     void when_givenUserWithNonExistId_expect_throwUserException() {
-        // Given
+        //region Given
         DeleteUser given = DeleteUser.builder()
                 .id("1a2b3c4d-1234-5678-1234-12345abcde99")
                 .build();
+        //endregion
 
-        // When
+        //region When
         assertThatExceptionOfType(UserException.class)
                 .isThrownBy(() -> deleteUserUseCaseHandler.handle(given));
+        //endregion
     }
 }
