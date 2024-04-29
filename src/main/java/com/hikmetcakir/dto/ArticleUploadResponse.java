@@ -12,4 +12,10 @@ import lombok.Setter;
 public class ArticleUploadResponse {
 
     private String id;
+
+    public static ArticleUploadResponse from(String id) {
+        ArticleUploadResponse response = new ArticleUploadResponse();
+        response.id = id;
+        return response;
+    }
 }
