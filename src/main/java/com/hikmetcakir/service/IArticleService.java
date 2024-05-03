@@ -1,9 +1,14 @@
 package com.hikmetcakir.service;
 
-import com.hikmetcakir.dto.ArticleUploadRequest;
-import com.hikmetcakir.dto.ArticleUploadResponse;
+import com.hikmetcakir.dto.*;
 
 public interface IArticleService {
 
-    ArticleUploadResponse upload(ArticleUploadRequest request);
+    String upload(ArticleUploadRequest request);
+
+    Article query(String id);
+
+    void update(String id, ArticleUpdateRequest request);
+
+    void delete(String id);
 }

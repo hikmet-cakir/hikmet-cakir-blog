@@ -9,9 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article {
+public class ArticleUpdateRequest {
 
-    private String id;
     private String title;
     private String content;
 }
