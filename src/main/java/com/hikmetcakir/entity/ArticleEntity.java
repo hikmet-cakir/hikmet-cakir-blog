@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +28,13 @@ public class ArticleEntity {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "topic")
+    private String topic;
+
+    @Column(name = "updated_date")
+    private LocalDate updatedDate;
+
+    @Column(name = "created_date")
+    private LocalDate createdDate;
 }

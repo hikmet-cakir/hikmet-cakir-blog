@@ -1,6 +1,7 @@
 package com.hikmetcakir.controller;
 
 import com.hikmetcakir.dto.Article;
+import com.hikmetcakir.dto.ArticleQueryRequest;
 import com.hikmetcakir.dto.ArticleUpdateRequest;
 import com.hikmetcakir.dto.ArticleUploadRequest;
 import com.hikmetcakir.service.impl.ArticleService;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,9 +24,9 @@ public class ArticleController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Article> query(@PathVariable String id) {
-        var response = articleService.query(id);
+    @RequestMapping(value = "/article", method = RequestMethod.GET)
+    public ResponseEntity<List<Article>> query(@RequestBody ArticleQueryRequest request) {
+        var response = articleService.query(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

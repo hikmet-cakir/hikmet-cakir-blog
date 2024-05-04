@@ -1,6 +1,7 @@
 package com.hikmetcakir.service.impl;
 
 import com.hikmetcakir.dto.Article;
+import com.hikmetcakir.dto.ArticleQueryRequest;
 import com.hikmetcakir.dto.ArticleUpdateRequest;
 import com.hikmetcakir.dto.ArticleUploadRequest;
 import com.hikmetcakir.entity.ArticleEntity;
@@ -9,7 +10,10 @@ import com.hikmetcakir.service.IArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +27,14 @@ public class ArticleService implements IArticleService {
         articleEntity.setId(UUID.randomUUID().toString());
         articleEntity.setTitle(request.getTitle());
         articleEntity.setContent(request.getContent());
+        articleEntity.setTopic(request.getTopic());
+        articleEntity.setCreatedDate(LocalDate.now());
         return articleRepository.save(articleEntity).getId();
     }
 
     @Override
-    public Article query(String id) {
-        return articleRepository.findById(id)
-                .map(articleEntity -> new Article(articleEntity.getId(), articleEntity.getTitle(), articleEntity.getContent()))
-                .orElseThrow(() -> new RuntimeException("Article not found"));
+    public List<Article> query(ArticleQueryRequest request) {
+        return articleRepository.findByFilter(request).stream().map(Article::from).collect(Collectors.toList());
     }
 
     @Override
@@ -38,6 +42,8 @@ public class ArticleService implements IArticleService {
         var articleEntity = articleRepository.findById(id).orElseThrow(() -> new RuntimeException("Article not found"));
         articleEntity.setTitle(request.getTitle());
         articleEntity.setContent(request.getContent());
+        articleEntity.setTopic(request.getTopic());
+        articleEntity.setUpdatedDate(LocalDate.now());
         articleRepository.save(articleEntity);
     }
 

@@ -13,4 +13,5 @@ public class ArticleUpdateRequest {
 
     private String title;
     private String content;
+    private String topic;
 }
