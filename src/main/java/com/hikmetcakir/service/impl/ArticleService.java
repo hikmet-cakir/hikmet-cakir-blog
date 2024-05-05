@@ -8,6 +8,8 @@ import com.hikmetcakir.entity.ArticleEntity;
 import com.hikmetcakir.repository.ArticleRepository;
 import com.hikmetcakir.service.IArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,7 +36,7 @@ public class ArticleService implements IArticleService {
 
     @Override
     public List<Article> query(ArticleQueryRequest request) {
-        return articleRepository.findByFilter(request).stream().map(Article::from).collect(Collectors.toList());
+        return articleRepository.findByFilter(request, request.buildPageable()).stream().map(Article::from).collect(Collectors.toList());
     }
 
     @Override
